@@ -73,6 +73,7 @@ i=-1
 while :; do
 	(( i++ ))
 	(( i == ${#pattern[@]} )) && i=0
-	printf '%s\r' "${pattern[i]}"
+	printf '%s\r' "${pattern[i]}" \
+		| sed 's/#/\xE2\x96\xA0/g' # Convert HASHMARK to full block
 	sleep .1
 done
