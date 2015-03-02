@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
-stty -echo
+stty -echo # Prevent keystrokes moving output
+tput civis # Invisible cursor
+trap 'tput cnorm' TERM HUP EXIT # Restore cursor on exit
 case $1 in
 wag)
 	pattern=(\
@@ -69,6 +71,17 @@ split)
 	'  ##        ##  ' \
 	' ##          ## ' \
 	'##            ##' \
+	);;
+splitgrow)
+	pattern=(\
+	'       ##       ' \
+	'      ####      ' \
+	'     ######     ' \
+	'    ########    ' \
+	'   ##########   ' \
+	'  ############  ' \
+	' ############## ' \
+	'################' \
 	);;
 pulse)
 	pattern=(\
